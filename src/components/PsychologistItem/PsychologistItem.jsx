@@ -5,11 +5,16 @@ const PsychologistItem = ({ item }) => {
   return (
     <div className={css.container}>
       <div className={css.imgwrap}>
-        <img alt={item.name || "camper"} src={item.avatar_url} />
+        <img
+          alt={item.name || "Psychologist"}
+          src={item.avatar_url}
+          className={css.img}
+        />
       </div>
       <div className={css.item}>
+        <p className={css.psychologist}>Psychologist</p>
         <div className={css.title}>
-          <h2>{item.name}</h2>
+          <h2 className={css.name}>{item.name}</h2>
           <h3 className={css.price}>{item.price_per_hour}</h3>
         </div>
 
@@ -20,6 +25,14 @@ const PsychologistItem = ({ item }) => {
           </p>
         </div>
         <p className={css.text}>{item.about}</p>
+        <button
+          className={css.btn}
+          onClick={() => {
+            console.log(item);
+          }}
+        >
+          Read More
+        </button>
       </div>
     </div>
   );

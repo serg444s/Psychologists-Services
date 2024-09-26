@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+}
+
+.imgwrap {
+  border: 2px solid rgba(252, 131, 44, 0.2);
+  border-radius: 30px;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+}
+
+.img {
+  width: 100%;
+}
+
+.psychologist {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #8a8a89;
+}
+
+.name {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 100%;
+  color: #191a15;
+}
