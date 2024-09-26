@@ -1,7 +1,10 @@
+import PsychologistList from "../../components/PsychologistList/PsychologistList";
+import psychologists from "../../../psychologists.json";
+
 const Psychologists = () => {
   return (
     <div>
-      <p>Psychologists</p>
+      <PsychologistList items={psychologists} />
     </div>
   );
 };
