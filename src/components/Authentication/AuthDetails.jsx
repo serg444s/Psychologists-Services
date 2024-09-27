@@ -1,10 +1,9 @@
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
+import IconSvg from "../IconSvg/IconSvg";
+import css from "./AuthDetails.module.css";
 
-const AuthDetails = () => {
-  const [authUser, setAuthUser] = useState(null);
-
+const AuthDetails = ({ authUser }) => {
   function logOut() {
     signOut(auth)
       .then(console.log("Log out ok"))
@@ -13,28 +12,26 @@ const AuthDetails = () => {
       });
   }
 
-  useEffect(() => {
-    const listen = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setAuthUser(user);
-      } else {
-        setAuthUser(null);
-      }
-    });
-    return () => {
-      listen();
-    };
-  }, []);
+  function trimEmail(email) {
+    const atIndex = email.indexOf("@");
+    if (atIndex !== -1) {
+      return email.slice(0, atIndex);
+    }
+    return email;
+  }
 
   return (
-    <div>
+    <>
       {authUser && (
-        <div>
-          <p>{authUser.email}</p>
-          <button onClick={logOut}>Log Out</button>
+        <div className={css.container}>
+          <IconSvg iconName={"user"} styles={css.icon} />
+          <p className={css.name}>{trimEmail(authUser.email)}</p>
+          <button onClick={logOut} className={css.btn}>
+            Log Out
+          </button>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

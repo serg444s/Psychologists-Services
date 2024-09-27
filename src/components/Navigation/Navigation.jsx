@@ -1,15 +1,31 @@
 import { Link, NavLink } from "react-router-dom";
 import css from "./Navigation.module.css";
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UserBar from "../UserBar/UserBar";
 import LogInModal from "../LogInModal/LogInModal";
 import RegistrationModal from "../RegistrationModal/RegistrationModal";
 import AuthDetails from "../Authentication/AuthDetails";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase";
 
 const Navigation = () => {
   const [openSignModal, setSineModalOpen] = useState(false);
   const [openRegModal, setRegModalOpen] = useState(false);
+  const [authUser, setAuthUser] = useState(null);
+
+  useEffect(() => {
+    const listen = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setAuthUser(user);
+      } else {
+        setAuthUser(null);
+      }
+    });
+    return () => {
+      listen();
+    };
+  }, []);
 
   function onOpenSignModal() {
     setSineModalOpen(true);
@@ -50,7 +66,12 @@ const Navigation = () => {
             Favorites
           </NavLink>
         </nav>
-        <UserBar openMenu={onOpenSignModal} onOpenRegModal={onOpenRegModal} />
+
+        {!authUser ? (
+          <UserBar openMenu={onOpenSignModal} onOpenRegModal={onOpenRegModal} />
+        ) : (
+          <AuthDetails authUser={authUser} />
+        )}
       </div>
 
       <div className={css.line}></div>
@@ -60,7 +81,6 @@ const Navigation = () => {
         modalIsOpen={openRegModal}
         closeModal={onCloseRegMenu}
       />
-      <AuthDetails />
     </>
   );
 };
