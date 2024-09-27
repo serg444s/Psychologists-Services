@@ -1,0 +1,23 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.btn {
+  border: none;
+  border-radius: 30px;
+  padding: 14px 39px;
+  background-color: #fc832c;
+  color: white;
+  transition: all 0.25s ease;
+  margin-top: 40px;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: #f37113;
+}

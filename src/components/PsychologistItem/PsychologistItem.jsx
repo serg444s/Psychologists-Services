@@ -1,7 +1,15 @@
+import { useState } from "react";
 import IconSvg from "../IconSvg/IconSvg";
 import css from "./PsychologistItem.module.css";
+import ReviewList from "../ReviewsList/ReviewsList";
 
 const PsychologistItem = ({ item }) => {
+  const [show, setShow] = useState(false);
+
+  function ShowReviews() {
+    setShow(true);
+  }
+
   return (
     <div className={css.container}>
       <div className={css.imgwrap}>
@@ -48,14 +56,14 @@ const PsychologistItem = ({ item }) => {
           </li>
         </ul>
         <p className={css.text}>{item.about}</p>
-        <button
-          className={css.btn}
-          onClick={() => {
-            console.log(item);
-          }}
-        >
-          Read More
-        </button>
+
+        {show ? (
+          <ReviewList reviews={item.reviews} />
+        ) : (
+          <button className={css.btn} onClick={ShowReviews}>
+            Read More
+          </button>
+        )}
       </div>
     </div>
   );
