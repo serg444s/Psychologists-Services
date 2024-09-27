@@ -11,19 +11,39 @@ const PsychologistItem = ({ item }) => {
           className={css.img}
         />
       </div>
-      <div className={css.item}>
+      <div>
         <p className={css.psychologist}>Psychologist</p>
-        <div className={css.title}>
-          <h2 className={css.name}>{item.name}</h2>
-          <h3 className={css.price}>{item.price_per_hour}</h3>
-        </div>
+        <h2 className={css.name}>{item.name}</h2>
 
-        <div className={css.location}>
+        <div className={css.details}>
           <p className={css.reviews}>
             <IconSvg width={16} height={16} iconName={"star"} />
-            {item.rating} ({item.reviews.length} Reviews)
+            {`Raiting: ${item.rating}`}
           </p>
+          <p className={css.reviews}>
+            {" "}
+            {`Price/1our: ${item.price_per_hour}$`}
+          </p>
+          <IconSvg width={24} height={24} iconName={"hart"} />
         </div>
+        <ul className={css.list}>
+          <li className={css.item}>
+            <p>Experience: </p>
+            <span>{item.experience}</span>
+          </li>
+          <li className={css.item}>
+            <p>License: </p>
+            <span>{item.license}</span>
+          </li>
+          <li className={css.item}>
+            <p>Specialization: </p>
+            <span>{item.specialization}</span>
+          </li>
+          <li className={css.item}>
+            <p>Initial consultation: </p>
+            <span>{item.initial_consultation}</span>
+          </li>
+        </ul>
         <p className={css.text}>{item.about}</p>
         <button
           className={css.btn}

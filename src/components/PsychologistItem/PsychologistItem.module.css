@@ -1,5 +1,8 @@
 .container {
   display: flex;
+  background-color: white;
+  border-radius: 24px;
+  padding: 24px;
 }
 
 .imgwrap {
@@ -26,4 +29,38 @@
   font-size: 24px;
   line-height: 100%;
   color: #191a15;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 24px;
+  padding: 8px 16px;
+
+  p {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: #8a8a89;
+  }
+
+  span {
+    color: #191a15;
+  }
 }
