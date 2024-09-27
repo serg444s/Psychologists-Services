@@ -1,8 +1,31 @@
 import { NavLink } from "react-router-dom";
 import css from "./Navigation.module.css";
 import clsx from "clsx";
+import { useState } from "react";
+import UserBar from "../UserBar/UserBar";
+import LogInModal from "../LogInModal/LogInModal";
+import RegistrationModal from "../RegistrationModal/RegistrationModal";
 
 const Navigation = () => {
+  const [openSignModal, setSineModalOpen] = useState(false);
+  const [openRegModal, setRegModalOpen] = useState(false);
+
+  function onOpenSignModal() {
+    setSineModalOpen(true);
+  }
+
+  function onCloseSineMenu() {
+    setSineModalOpen(false);
+  }
+
+  function onOpenRegModal() {
+    setRegModalOpen(true);
+  }
+
+  function onCloseRegMenu() {
+    setRegModalOpen(false);
+  }
+
   const buildLinkClass = ({ isActive }) => {
     return clsx(css.link, isActive && css.active);
   };
@@ -20,7 +43,12 @@ const Navigation = () => {
           Favorites
         </NavLink>
       </nav>
-      <div className={css.line}></div>
+      <UserBar openMenu={onOpenSignModal} onOpenRegModal={onOpenRegModal} />
+      <LogInModal modalIsOpen={openSignModal} closeModal={onCloseSineMenu} />
+      <RegistrationModal
+        modalIsOpen={openRegModal}
+        closeModal={onCloseRegMenu}
+      />
     </>
   );
 };

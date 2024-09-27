@@ -6,7 +6,7 @@ const PsychologistList = ({ items }) => {
     <ul className={css.list}>
       {items.map((item) => {
         return (
-          <li key={item._id}>
+          <li key={item.name}>
             <PsychologistItem item={item} />
           </li>
         );
