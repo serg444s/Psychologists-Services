@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import css from "./Navigation.module.css";
 import clsx from "clsx";
 import { useState } from "react";
@@ -32,18 +32,28 @@ const Navigation = () => {
 
   return (
     <>
-      <nav className={css.nav}>
-        <NavLink to="/" className={buildLinkClass}>
-          Home
-        </NavLink>
-        <NavLink to="/psychologists" className={buildLinkClass}>
-          Psychologists
-        </NavLink>
-        <NavLink to="/favorites" className={buildLinkClass}>
-          Favorites
-        </NavLink>
-      </nav>
-      <UserBar openMenu={onOpenSignModal} onOpenRegModal={onOpenRegModal} />
+      <div className={css.container}>
+        <Link to="/" className={css.logo}>
+          <p>
+            psychologists.<span>services</span>
+          </p>
+        </Link>
+        <nav className={css.nav}>
+          <NavLink to="/" className={buildLinkClass}>
+            Home
+          </NavLink>
+          <NavLink to="/psychologists" className={buildLinkClass}>
+            Psychologists
+          </NavLink>
+          <NavLink to="/favorites" className={buildLinkClass}>
+            Favorites
+          </NavLink>
+        </nav>
+        <UserBar openMenu={onOpenSignModal} onOpenRegModal={onOpenRegModal} />
+      </div>
+
+      <div className={css.line}></div>
+
       <LogInModal modalIsOpen={openSignModal} closeModal={onCloseSineMenu} />
       <RegistrationModal
         modalIsOpen={openRegModal}

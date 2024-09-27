@@ -1,11 +1,15 @@
+import css from "./UserBar.module.css";
+
 const UserBar = ({ openMenu, onOpenRegModal }) => {
   return (
-    <>
-      <div>
-        <button onClick={openMenu}>Log In</button>
-        <button onClick={onOpenRegModal}>Registration</button>
-      </div>
-    </>
+    <div className={css.container}>
+      <button onClick={openMenu} className={css.btn}>
+        Log In
+      </button>
+      <button onClick={onOpenRegModal} className={css.btn}>
+        Registration
+      </button>
+    </div>
   );
 };
 
