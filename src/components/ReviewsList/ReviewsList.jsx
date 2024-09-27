@@ -1,14 +1,18 @@
 import { useState } from "react";
 import ReviewItem from "../ReviewItem/ReviewItem";
 import css from "./ReviewsList.module.css";
+import AppointmentForm from "../AppointmentForm/AppointmentForm";
 
-const ReviewList = ({ reviews }) => {
+const ReviewList = ({ reviews, name, photo }) => {
+  const [showForm, setShowForm] = useState(false);
 
-    const [showForm, setShowForm] = useState(false)
+  function makeAppointment() {
+    setShowForm(true);
+  }
 
-    function makeAppointment() { 
-        setShowForm(true)
-    }
+  function closeForm() {
+    setShowForm(false);
+  }
 
   return (
     <>
@@ -21,9 +25,15 @@ const ReviewList = ({ reviews }) => {
           );
         })}
       </ul>
-          <button type="button" onClick={makeAppointment} className={ css.btn}>
+      <button type="button" onClick={makeAppointment} className={css.btn}>
         Make an appointment
       </button>
+      <AppointmentForm
+        modalIsOpen={showForm}
+        closeModal={closeForm}
+        name={name}
+        photo={photo}
+      />
     </>
   );
 };

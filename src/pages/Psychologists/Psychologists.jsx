@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import PsychologistList from "../../components/PsychologistList/PsychologistList";
 import { firstPageQuery } from "../../firebase-db";
 import { get } from "firebase/database";
+import data from "../../../psychologists.json";
 
 const Psychologists = () => {
   const [items, setItems] = useState([]);
@@ -26,7 +27,7 @@ const Psychologists = () => {
 
   return (
     <div>
-      <PsychologistList items={items} />
+      <PsychologistList items={data} />
     </div>
   );
 };

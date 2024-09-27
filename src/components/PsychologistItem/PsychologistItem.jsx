@@ -58,7 +58,11 @@ const PsychologistItem = ({ item }) => {
         <p className={css.text}>{item.about}</p>
 
         {show ? (
-          <ReviewList reviews={item.reviews} />
+          <ReviewList
+            reviews={item.reviews}
+            name={item.name}
+            photo={item.avatar_url}
+          />
         ) : (
           <button className={css.btn} onClick={ShowReviews}>
             Read More
