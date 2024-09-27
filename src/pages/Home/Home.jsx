@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import css from "./Home.module.css";
+import IconSvg from "../../components/IconSvg/IconSvg";
 
 const Home = () => {
   return (
@@ -16,7 +17,17 @@ const Home = () => {
           Get started
         </Link>
       </div>
-      <div className={css.wrapper}></div>
+      <div className={css.wrapper}>
+        <div className={css.orange}>
+          <div className={css.iconwrap}>
+            <IconSvg iconName={"done"} />
+          </div>
+          <div>
+            <p className={css.description}>Experienced psychologists</p>
+            <p className={css.number}>15,000</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
