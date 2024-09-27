@@ -1,8 +1,20 @@
 .container {
   display: flex;
-  background-color: white;
   border-radius: 24px;
   padding: 24px;
+  background-color: white;
+  gap: 24px;
+}
+
+.content {
+  max-width: 990px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
 }
 
 .imgwrap {
@@ -10,11 +22,12 @@
   border-radius: 30px;
   width: 120px;
   height: 120px;
-  object-fit: cover;
+  padding: 12px;
 }
 
 .img {
-  width: 100%;
+  width: 96px;
+  height: 96px;
 }
 
 .psychologist {
@@ -22,6 +35,7 @@
   font-size: 16px;
   line-height: 1.5;
   color: #8a8a89;
+  text-align: start;
 }
 
 .name {
@@ -29,6 +43,7 @@
   font-size: 24px;
   line-height: 100%;
   color: #191a15;
+  text-align: start;
 }
 
 .details {
@@ -44,6 +59,7 @@
   justify-content: flex-start;
   flex-wrap: wrap;
   gap: 8px;
+  margin-bottom: 24px;
 }
 
 .item {
@@ -52,6 +68,7 @@
   justify-content: center;
   border-radius: 24px;
   padding: 8px 16px;
+  background: #f3f3f3;
 
   p {
     font-weight: 500;
@@ -63,4 +80,29 @@
   span {
     color: #191a15;
   }
+}
+
+.text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+  color: rgba(25, 26, 21, 0.5);
+  text-align: start;
+}
+
+.btn {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: #191a15;
+}
+
+.btn:hover,
+.btn:focus {
+  font-weight: 600;
 }

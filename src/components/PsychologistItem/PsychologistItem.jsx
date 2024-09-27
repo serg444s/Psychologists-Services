@@ -11,21 +11,24 @@ const PsychologistItem = ({ item }) => {
           className={css.img}
         />
       </div>
-      <div className={ css.content}>
-        <p className={css.psychologist}>Psychologist</p>
-        <h2 className={css.name}>{item.name}</h2>
-
-        <div className={css.details}>
-          <p className={css.reviews}>
-            <IconSvg width={16} height={16} iconName={"star"} />
-            {`Raiting: ${item.rating}`}
-          </p>
-          <p className={css.reviews}>
-            {" "}
-            {`Price/1our: ${item.price_per_hour}$`}
-          </p>
-          <IconSvg width={24} height={24} iconName={"hart"} />
+      <div className={css.content}>
+        <div className={css.header}>
+          <div>
+            <p className={css.psychologist}>Psychologist</p>
+            <h2 className={css.name}>{item.name}</h2>
+          </div>
+          <div className={css.details}>
+            <p className={css.reviews}>
+              <IconSvg width={16} height={16} iconName={"star"} />
+              {`Raiting: ${item.rating}`}
+            </p>
+            <p
+              className={css.reviews}
+            >{`Price/1our: ${item.price_per_hour}$`}</p>
+            <IconSvg width={24} height={24} iconName={"hart"} />
+          </div>
         </div>
+
         <ul className={css.list}>
           <li className={css.item}>
             <p>Experience: </p>

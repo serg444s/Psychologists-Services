@@ -48,10 +48,8 @@ img {
 }
 
 body {
-  font-family: 'DM Sans', sans-serif;
-  background-color: #FFFFFF;
-  color: var(--black);
-
+  font-family: "DM Sans", sans-serif;
+  background-color: #fbfbfb;
 }
 html {
   scroll-behavior: smooth;
@@ -67,7 +65,7 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d9d9d9;;
+  background: #d9d9d9;
   width: 8px;
   border-radius: 7px;
 }
