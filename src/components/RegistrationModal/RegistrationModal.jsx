@@ -2,6 +2,10 @@ import Modal from "react-modal";
 import { useForm } from "react-hook-form";
 import IconSvg from "../IconSvg/IconSvg";
 import css from "./RegistrationModal.module.css";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
 
 const customStyles = {
   content: {
@@ -13,11 +17,20 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
     padding: "40px",
     width: "565px",
-    height: "509px",
+    // height: "509px",
     borderRadius: "30px",
     position: "relative",
   },
 };
+
+const registrationSchema = yup.object().shape({
+  name: yup.string().required("Name is required"),
+  email: yup.string().email("Invalid email").required("Email is required"),
+  password: yup
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+});
 
 Modal.setAppElement("#root");
 
@@ -26,7 +39,26 @@ const RegistrationModal = ({ modalIsOpen, closeModal }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(registrationSchema),
+  });
+
+  const onSubmit = (data) => {
+    console.log(data); // Дії при відправці форми
+    createUserWithEmailAndPassword(
+      auth,
+      data.email,
+      data.password,
+      data.displayName
+    )
+      .then((user) => {
+        console.log(user);
+        closeModal();
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
 
   return (
     <Modal
@@ -36,7 +68,7 @@ const RegistrationModal = ({ modalIsOpen, closeModal }) => {
     >
       <div className={css.container}>
         <h2 className={css.name}>Registration</h2>
-        <p>
+        <p className={css.text}>
           Thank you for your interest in our platform! In order to register, we
           need some information. Please provide us with the following
           information.
@@ -46,13 +78,35 @@ const RegistrationModal = ({ modalIsOpen, closeModal }) => {
           <IconSvg iconName={"close"} width={26} height={26} />
         </button>
       </div>
-      <form onSubmit={handleSubmit((data) => console.log(data))}>
-        <input {...register("Name")} />
-        <input {...register("Email", { required: true })} />
-        {errors.lastName && <p>Last name is required.</p>}
-        <input {...register("Password", { pattern: /\d+/ })} />
-        {errors.age && <p>Please enter number for age.</p>}
-        <input type="submit" />
+      <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
+        <div>
+          <input
+            {...register("displayName")}
+            placeholder="Name"
+            className={css.input}
+          />
+          {errors.name && <p>{errors.name.message}</p>}
+        </div>
+        <div>
+          <input
+            {...register("email")}
+            placeholder="Email"
+            className={css.input}
+          />
+          {errors.email && <p>{errors.email.message}</p>}
+        </div>
+        <div>
+          <input
+            type="password"
+            {...register("password")}
+            placeholder="Password"
+            className={css.input}
+          />
+          {errors.password && <p>{errors.password.message}</p>}
+        </div>
+        <button type="submit" className={css.btn}>
+          Register
+        </button>
       </form>
     </Modal>
   );

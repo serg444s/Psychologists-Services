@@ -1,7 +1,11 @@
 import Modal from "react-modal";
 import { useForm } from "react-hook-form";
 import IconSvg from "../IconSvg/IconSvg";
-import css from "./LogInModal";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import css from "./LogInModal.module.css";
+import { auth } from "../../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const customStyles = {
   content: {
@@ -19,6 +23,14 @@ const customStyles = {
   },
 };
 
+const loginSchema = yup.object().shape({
+  email: yup.string().email("Invalid email").required("Email is required"),
+  password: yup
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+});
+
 Modal.setAppElement("#root");
 
 const LogInModal = ({ modalIsOpen, closeModal }) => {
@@ -26,7 +38,21 @@ const LogInModal = ({ modalIsOpen, closeModal }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(loginSchema),
+  });
+
+  const onSubmit = (data) => {
+    console.log(data); // Дії при відправці форми
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then((user) => {
+        console.log(user);
+        closeModal();
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
 
   return (
     <Modal
@@ -36,7 +62,7 @@ const LogInModal = ({ modalIsOpen, closeModal }) => {
     >
       <div className={css.container}>
         <h2 className={css.name}>Log In</h2>
-        <p>
+        <p className={css.text}>
           Welcome back! Please enter your credentials to access your account and
           continue your search for a psychologist.
         </p>
@@ -45,13 +71,22 @@ const LogInModal = ({ modalIsOpen, closeModal }) => {
           <IconSvg iconName={"close"} width={26} height={26} />
         </button>
       </div>
-      <form onSubmit={handleSubmit((data) => console.log(data))}>
-        <input {...register("Name")} />
-        <input {...register("Email", { required: true })} />
-        {errors.lastName && <p>Last name is required.</p>}
-        <input {...register("Password", { pattern: /\d+/ })} />
-        {errors.age && <p>Please enter number for age.</p>}
-        <input type="submit" />
+      <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
+        <div>
+          <input {...register("email")} className={css.input} />
+          {errors.email && <p>{errors.email.message}</p>}
+        </div>
+        <div>
+          <input
+            type="password"
+            {...register("password")}
+            className={css.input}
+          />
+          {errors.password && <p>{errors.password.message}</p>}
+        </div>
+        <button type="submit" className={css.btn}>
+          Login
+        </button>
       </form>
     </Modal>
   );

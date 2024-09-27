@@ -11,7 +11,7 @@ const PsychologistItem = ({ item }) => {
           className={css.img}
         />
       </div>
-      <div>
+      <div className={ css.content}>
         <p className={css.psychologist}>Psychologist</p>
         <h2 className={css.name}>{item.name}</h2>
 

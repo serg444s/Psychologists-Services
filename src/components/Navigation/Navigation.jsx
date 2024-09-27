@@ -5,6 +5,7 @@ import { useState } from "react";
 import UserBar from "../UserBar/UserBar";
 import LogInModal from "../LogInModal/LogInModal";
 import RegistrationModal from "../RegistrationModal/RegistrationModal";
+import AuthDetails from "../Authentication/AuthDetails";
 
 const Navigation = () => {
   const [openSignModal, setSineModalOpen] = useState(false);
@@ -59,6 +60,7 @@ const Navigation = () => {
         modalIsOpen={openRegModal}
         closeModal={onCloseRegMenu}
       />
+      <AuthDetails />
     </>
   );
 };
