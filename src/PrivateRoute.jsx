@@ -1,11 +1,19 @@
-import { useSelector } from "react-redux";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Navigate } from "react-router-dom";
-import { selectIsLoggedIn } from "../redux/auth/selectors";
+import { auth } from "./firebase";
 
-const PrivateRoute = ({ component: Component, redirectTo = "/" }) => {
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+const PrivateRoute = ({ children }) => {
+  const [user, loading] = useAuthState(auth);
 
-  return isLoggedIn ? Component : <Navigate to={redirectTo} />;
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!user) {
+    return <Navigate to="/" />;
+  }
+
+  return children;
 };
 
 export default PrivateRoute;

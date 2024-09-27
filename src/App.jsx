@@ -4,6 +4,7 @@ import "./App.css";
 import Navigation from "./components/Navigation/Navigation.jsx";
 import NotFoundPage from "./pages/NotFound/NotFound.jsx";
 import Loader from "./components/Loader/Loader.jsx";
+import PrivateRoute from "./PrivateRoute.jsx";
 
 function App() {
   const Home = lazy(() => import("./pages/Home/Home.jsx"));
@@ -19,7 +20,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/psychologists" element={<Psychologists />} />
-          <Route path="/favorites" element={<Favorites />} />
+          <Route
+            path="/favorites"
+            element={
+              <PrivateRoute>
+                <Favorites />
+              </PrivateRoute>
+            }
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
