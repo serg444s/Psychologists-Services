@@ -1,0 +1,14 @@
+.btn {
+  border: none;
+  border-radius: 30px;
+  padding: 14px 39px;
+  background-color: #fc832c;
+  color: white;
+  transition: all 0.25s ease;
+  margin-top: 60px;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: #f37113;
+}

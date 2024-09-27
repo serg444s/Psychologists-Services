@@ -8,16 +8,14 @@ const Psychologists = () => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    // Выполняем запрос и обрабатываем данные
     get(firstPageQuery)
       .then((snapshot) => {
-        console.log("snapshot", snapshot);
-
         if (snapshot.exists()) {
-          console.log("snapshot.exists", snapshot.exists());
-
-          console.log(snapshot.val()); // Данные первой страницы
-          setItems(snapshot.val());
+          const data = snapshot.val();
+          const psychologistsArray = Array.isArray(data)
+            ? data
+            : Object.values(data);
+          setItems(psychologistsArray);
         } else {
           console.log("Нет данных");
         }
@@ -25,7 +23,7 @@ const Psychologists = () => {
       .catch((error) => {
         console.error(error);
       });
-  }, []); // Пустой массив зависимостей, чтобы запрос выполнялся только один раз
+  }, []);
 
   return (
     <div>
