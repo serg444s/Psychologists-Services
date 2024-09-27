@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import PsychologistList from "../../components/PsychologistList/PsychologistList";
 import { firstPageQuery } from "../../firebase-db";
 import { get } from "firebase/database";
-import data from "../../../psychologists.json";
+// import data from "../../../psychologists.json";
 
 const Psychologists = () => {
   const [items, setItems] = useState([]);
@@ -11,9 +11,11 @@ const Psychologists = () => {
     // Выполняем запрос и обрабатываем данные
     get(firstPageQuery)
       .then((snapshot) => {
-        console.log(snapshot);
+        console.log("snapshot", snapshot);
 
         if (snapshot.exists()) {
+          console.log("snapshot.exists", snapshot.exists());
+
           console.log(snapshot.val()); // Данные первой страницы
           setItems(snapshot.val());
         } else {
@@ -27,7 +29,7 @@ const Psychologists = () => {
 
   return (
     <div>
-      <PsychologistList items={data} />
+      <PsychologistList items={items} />
     </div>
   );
 };

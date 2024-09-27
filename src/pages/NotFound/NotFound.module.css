@@ -6,11 +6,10 @@
 }
 
 .text {
-  font-weight: 600;
-  font-size: 20px;
+  font-weight: 400;
+  font-size: 16px;
   line-height: 1.2;
-  color: var(--gray);
-  margin: 48px auto;
+  margin: 24px auto;
   text-align: center;
 }
 
@@ -21,20 +20,14 @@
 
 .link {
   border: none;
+  border-radius: 30px;
+  padding: 14px 39px;
+  background-color: #fc832c;
+  color: white;
   transition: all 0.25s ease;
-  outline: none;
-  border-radius: 200px;
-  background: var(--red);
-  color: var(--white);
-  border-radius: 200px;
-  padding: 16px 60px;
-  width: 160px;
-  height: 56px;
-  margin-left: 350px;
-  margin-top: 24px;
 }
 
 .link:hover,
 .link:focus {
-  background-color: var(--hover-red);
+  background-color: #f37113;
 }
