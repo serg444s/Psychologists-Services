@@ -3,7 +3,7 @@ import IconSvg from "../IconSvg/IconSvg";
 import css from "./PsychologistItem.module.css";
 import ReviewList from "../ReviewsList/ReviewsList";
 
-const PsychologistItem = ({ item }) => {
+const PsychologistItem = ({ item, addToFaforites }) => {
   const [show, setShow] = useState(false);
 
   function ShowReviews() {
@@ -33,7 +33,14 @@ const PsychologistItem = ({ item }) => {
             <p
               className={css.reviews}
             >{`Price/1our: ${item.price_per_hour}$`}</p>
-            <IconSvg width={24} height={24} iconName={"hart"} />
+            <button
+              onClick={() => {
+                addToFaforites(item);
+              }}
+              className={css.add}
+            >
+              <IconSvg iconName={"hart"} />
+            </button>
           </div>
         </div>
 

@@ -53,6 +53,18 @@
   gap: 28px;
 }
 
+.add {
+  background-color: transparent;
+  outline: none;
+  border: none;
+
+  svg {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+}
+
 .list {
   display: flex;
   align-items: center;

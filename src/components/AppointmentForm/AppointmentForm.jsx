@@ -83,15 +83,13 @@ const AppointmentForm = ({ name, photo, modalIsOpen, closeModal }) => {
           />
           {errors.name && <p>{errors.name.message}</p>}
         </div>
-        <div>
+        <div className={css.div}>
           <input
             {...register("phone")}
             placeholder="+380"
             className={css.input}
           />
           {errors.name && <p>{errors.phone.message}</p>}
-        </div>
-        <div>
           <input
             {...register("time")}
             placeholder="00:00"
